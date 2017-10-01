@@ -1,12 +1,9 @@
-﻿using HQWebApi.Models;
+﻿using HQWebApi.Helpers;
+using HQWebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace HQWebApi.Controllers
@@ -17,7 +14,7 @@ namespace HQWebApi.Controllers
         {
             new Player
             {
-                ID = 1,
+                Id = 1,
                 Name = "Player1",
                 Charisma = 1,
                 Intelligence = 10,
@@ -27,7 +24,7 @@ namespace HQWebApi.Controllers
             },
             new Player
             {
-                ID = 2,
+                Id = 2,
                 Name = "Player2",
                 Charisma = 10,
                 Intelligence = 100,
@@ -43,9 +40,18 @@ namespace HQWebApi.Controllers
         }
 
 
-        public IHttpActionResult PutPlayer(int id)
+        public IHttpActionResult GetPlayer(int id)
         {
-            var player = players.FirstOrDefault((p) => p.ID == id);
+            var sql = new SQLHelper();
+            sql.SqlCommand.CommandText = "SELECT * FROM Player WHERE Id = @Id;";
+            sql.SqlCommand.Parameters.AddWithValue("@Id", id);
+            var data = sql.GetDataSet();
+
+            var row = data.Tables[0].Rows[0];
+
+            var player = new Player(row);
+
+            // TODO
             if (player == null)
             {
                 return NotFound();
@@ -62,14 +68,12 @@ namespace HQWebApi.Controllers
              
             try
             {
-
                 con.Open();
                 // Create a object of SqlCommand class
                 com.Connection = con; //Pass the connection object to Command
                 com.CommandText = "INSERT INTO Player(Name) VALUES (@name)"; //Stored Procedure Name
 
                 com.Parameters.AddWithValue("@name", player.Name);
-
                 com.ExecuteNonQuery();
             }
             catch (Exception ex)

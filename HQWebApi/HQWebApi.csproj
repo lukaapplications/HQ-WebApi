@@ -184,6 +184,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SQLHelper.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Quest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -226,6 +228,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="SQL\CreateDB.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

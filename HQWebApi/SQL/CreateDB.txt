@@ -1,0 +1,39 @@
+﻿USE [DB_A2B6B9_hgdev]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- PLAYER --
+CREATE TABLE [dbo].[Player](
+	[Id] [bigint] NOT NULL PRIMARY KEY,
+	[Name] [nchar](20) NOT NULL,
+	[Intelligence] [int] NULL,
+	[Strength] [int] NULL,
+	[Charisma] [int] NULL,
+	[Good] [int] NULL,
+	[Evil] [int] NULL,	
+) ON [PRIMARY]
+GO
+
+-- SAMPLE DATA
+INSERT INTO [dbo].[Player]
+           ([Id]
+           ,[Name]
+           ,[Intelligence]
+           ,[Strength]
+           ,[Charisma]
+           ,[Good]
+           ,[Evil])
+     VALUES
+           (1
+           ,'BigPython'
+           ,10
+           ,10
+           ,10
+           ,50
+           ,50)
+GO

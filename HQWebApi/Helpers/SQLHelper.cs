@@ -43,5 +43,39 @@ namespace HQWebApi.Helpers
 
             return ds;
         }
+
+        public object ExecuteScalar()
+        {
+            object obj = null;
+            try
+            {
+                mConnection.Open();
+                obj = mCommand.ExecuteScalar();
+                mConnection.Close();
+            }
+            finally
+            {
+                mConnection.Close();
+            }
+
+            return obj;
+        }
+
+        public int ExecuteNonQuery()
+        {
+            int rows = 0;
+            try
+            {
+                mConnection.Open();
+                rows = mCommand.ExecuteNonQuery();
+                mConnection.Close();
+            }
+            finally
+            {
+                mConnection.Close();
+            }
+
+            return rows;
+        }
     }
 }

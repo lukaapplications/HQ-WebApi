@@ -7,30 +7,46 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- PLAYER --
 CREATE TABLE [dbo].[Player](
-	[Id] [bigint] NOT NULL PRIMARY KEY,
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
 	[Name] [nchar](20) NOT NULL,
 	[Intelligence] [int] NULL,
 	[Strength] [int] NULL,
 	[Charisma] [int] NULL,
 	[Good] [int] NULL,
-	[Evil] [int] NULL,	
+	[Evil] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Player] ADD  CONSTRAINT [DF_Player_Intelligence]  DEFAULT ((0)) FOR [Intelligence]
+GO
+
+ALTER TABLE [dbo].[Player] ADD  CONSTRAINT [DF_Player_Strength]  DEFAULT ((0)) FOR [Strength]
+GO
+
+ALTER TABLE [dbo].[Player] ADD  CONSTRAINT [DF_Player_Charisma]  DEFAULT ((0)) FOR [Charisma]
+GO
+
+ALTER TABLE [dbo].[Player] ADD  CONSTRAINT [DF_Player_Good]  DEFAULT ((0)) FOR [Good]
+GO
+
+ALTER TABLE [dbo].[Player] ADD  CONSTRAINT [DF_Player_Evil]  DEFAULT ((0)) FOR [Evil]
 GO
 
 -- SAMPLE DATA
 INSERT INTO [dbo].[Player]
-           ([Id]
-           ,[Name]
+           ([Name]
            ,[Intelligence]
            ,[Strength]
            ,[Charisma]
            ,[Good]
            ,[Evil])
      VALUES
-           (1
-           ,'BigPython'
+           ('BigPython'
            ,10
            ,10
            ,10
